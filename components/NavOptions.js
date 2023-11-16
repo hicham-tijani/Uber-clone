@@ -32,10 +32,10 @@ const navigation = useNavigation();
      renderItem={({ item }) => (
     <TouchableOpacity 
     onPress={() => navigation.navigate(item.screen)}
-    style={tw`p-2 pl-6 pb-8 pt-2 bg-gray-200 m-1 w-41`}>
+    style={tw`p-2 pl-5 pb-6 pt-2 bg-gray-200 m-1 w-40`}>
             <View>
             <Image 
-            style={{width:120,height:105, resizeMOde:"contain" }}
+            style={{width:120,height:105, resizeMode:"contain" }}
             source={{uri: item.image}}/>
             <Text style={tw`mt-2 text-lg font-semibold`}>{item.title}</Text>
         
