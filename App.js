@@ -22,15 +22,13 @@ const Stack = createStackNavigator();
         name='HomeScreen'
         component={HomeScreen}
         options={{
-          headerShow:false,
+          headerShow:false
         }}
         />
         <Stack.Screen 
         name='MapScreen'
         component={MapScreen}
-        options={{
-          headerShow:false,
-        }}
+        options={{headerShow:false}}
         />
       </Stack.Navigator>
         </SafeAreaProvider>
