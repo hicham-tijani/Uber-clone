@@ -13,13 +13,14 @@ const NavigateCard = () => {
 
     return (
         <SafeAreaView style={tw`bg-white flex-1`}>
-            <Text style={tw`text-center py-5 text-xl`}>NavigateCard</Text>
+            <Text style={tw`text-center py-5 text-xl`}>Destination?</Text>
             <View style={tw`border-t border-gray-200 flex-shrink`}>
                 <View>
                     <GooglePlacesAutocomplete
                         placeholder='Where to?'
                         styles={toInputBoxStyles}
                         fetchDetails={true}
+                        enablePoweredByContainer={false}
                         returnKeyType={"search"}
                         minLength={2}
                         onPress={(data, details = null) => {
@@ -32,7 +33,6 @@ const NavigateCard = () => {
                             navigation.navigate('RideOptionsCard')
                             
                         }}
-                        enablePoweredByContainer={false}
                         query={{
                             key: GOOGLE_MAPS_APIKEY,
                             language: "en",
@@ -55,14 +55,19 @@ const toInputBoxStyles = StyleSheet.create({
         backgroundColor: "white",
         paddingTop: 20,
         flex: 0,
+        
     },
     textInput: {
         backgroundColor: "#DDDDDF",
-        borderRadius: 0,
+        borderRadius: 20,
         fontSize: 18,
+        borderRadius:25
     },
     textInputContainer: {
         paddingHorizontal: 20,
         paddingBottom: 0,
+        borderRadius:20,
     },
+
+
 });
