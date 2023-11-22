@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, FlatList, Image } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image } from 'react-native';
 import React, { useState } from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -29,7 +29,7 @@ const data = [
 
 const SURGE_CHARGE_PRICE = 1.5;
 
-const RideOptionscard = () => {
+const RideOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
@@ -39,8 +39,8 @@ const RideOptionscard = () => {
             <View>
                 <TouchableOpacity 
                 onPress={() => {navigation.navigate("NavigateCard"); }} 
-                style={tw`absolute top-3 left-5 z-50 p-3 rounded-full` }>
-                    <Icon name="chevron-left" type="font-awesome" size={14} />
+                style={tw`absolute top-4 left-5 z-50 p-3 rounded-full bg-black` }>
+                    <Icon name="chevron-left" class="icon-left" color="white" type="font-awesome" size={14} />
                 </TouchableOpacity>
                 <Text style={tw`text-center text-xl py-5`}>
                     Select a Ride — {travelTimeInformation?.distance?.text}
@@ -60,6 +60,8 @@ const RideOptionscard = () => {
                             style={{
                                 width: 100,
                                 height: 100,
+                                right:20,
+                                bottom:18,
                                 resizeMode: 'contain',
                             }}
                             source={{ uri: image }}
@@ -68,7 +70,7 @@ const RideOptionscard = () => {
                             <Text style={tw`text-xl font-semibold`}>{title}</Text>
                             <Text>{travelTimeInformation?.duration?.text}  Travel Time</Text>
                         </View>
-                        <Text style={tw`text-xl`}>
+                        <Text style={tw`text-xl right-6 bottom-3`}>
                             {new Intl.NumberFormat('en-gb', {
                                 style: 'currency',
                                 currency: 'GBP'
@@ -82,9 +84,9 @@ const RideOptionscard = () => {
 
             <View style={tw`mt-auto border-t border-gray-200`}>
                 <TouchableOpacity disabled={!selected} 
-                style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`}
+                style={tw`bg-black py-3 m-3 rounded-full ${!selected && "bg-gray-300"}`}
                 >
-                <Text style={tw`text-center text-white text-xl`}>
+                <Text style={tw`text-center text-white text-xl `}>
                 Choose {selected?.title}
                 </Text>
                 </TouchableOpacity>
@@ -93,4 +95,5 @@ const RideOptionscard = () => {
     );
 };
 
-export default RideOptionscard
+export default RideOptionsCard
+

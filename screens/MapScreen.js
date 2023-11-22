@@ -5,7 +5,7 @@ import Map from '../components/Map'
 import MapView from 'react-native-maps'
 import NavigateCard from '../components/NavigateCard'
 import { createStackNavigator } from '@react-navigation/stack'
-import RideOptionsCard from '../components/RideOptionscard'
+import RideOptionsCard from '../components/RideOptionsCard'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Icon } from 'react-native-elements'
 import { useNavigation

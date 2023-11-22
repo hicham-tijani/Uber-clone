@@ -73,6 +73,11 @@ const toInputBoxStyles = StyleSheet.create({
         backgroundColor: "white",
         paddingTop: 20,
         flex: 0,
+        borderTopLeftRadius:25,
+        borderTopRightRadius:25,
+        borderWidth:1.4,
+        borderBlockStartColor:"black",
+        borderBlockEndColor:"white",
 
     },
     textInput: {
