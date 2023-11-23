@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text , Image} from 'react-native';
 import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import MapView, { Marker } from 'react-native-maps';
@@ -13,25 +13,26 @@ const Map = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!origin || ! destination) return;
+        if (!origin || !destination) return;
 
         mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], {
             edgePadding: { top: 50, right: 50, bottom: 50, left: 50 }
         });
     }, [origin, destination]);
 
-    
-    useEffect(() => {
-        if (!origin || ! destination) return;
 
-        const getTravelTime = async() => {
+
+    useEffect(() => {
+        if (!origin || !destination) return;
+
+        const getTravelTime = async () => {
             fetch(
                 `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`
             ).then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
-            });
+                .then(data => {
+                    // console.log(data);
+                    dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
+                });
         };
 
         getTravelTime();
@@ -70,7 +71,9 @@ const Map = () => {
                     title="Origin"
                     description={origin.description}
                     identifier="origin"
-                />
+                >
+                    <Image source={require('../assets/marker.png')} style={{ height: 35, width: 35 }} />
+                </Marker>
             )}
             {destination?.location && (
                 <Marker
@@ -81,7 +84,11 @@ const Map = () => {
                     title="Destination"
                     description={destination.description}
                     identifier="destination"
-                />
+                >
+                    <Image source={require('../assets/marker.png')} style={{ height: 35, width: 35 }} />
+                </Marker>
+
+
             )}
         </MapView>
     )

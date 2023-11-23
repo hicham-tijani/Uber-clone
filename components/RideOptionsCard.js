@@ -1,10 +1,25 @@
-import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image, StatusBar } from 'react-native';
+import React, { useState, useEffect} from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
 import tw from 'tailwind-react-native-classnames';
+import HomeScreen from '../screens/HomeScreen';
+
+
+const sendData = () => {
+    fetch({
+        // ...
+    })
+        .then(() => {
+            showMessage("Success!", "success");
+        })
+        .catch((err) => {
+            setMessage("Failed to send request.", "error");
+        });
+}
+
 
 const data = [
     {
@@ -35,12 +50,12 @@ const RideOptionsCard = () => {
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
 
     return (
-        <SafeAreaView style={tw`bg-white flex-grow`}>
+        <SafeAreaView style={tw`bg-white rounded-tl-3xl rounded-tr-3xl border border-black flex-grow`}>
             <View>
-                <TouchableOpacity 
-                onPress={() => {navigation.navigate("NavigateCard"); }} 
-                style={tw`absolute top-4 left-5 z-50 p-3 rounded-full bg-black` }>
-                    <Icon name="chevron-left" class="icon-left" color="white" type="font-awesome" size={14} />
+                <TouchableOpacity
+                    onPress={() => { navigation.navigate("NavigateCard"); }}
+                    style={tw`absolute top-4 left-5 z-50 p-3 rounded-full bg-black`}>
+                    <Icon name="chevron-left" color="white" type="font-awesome" size={14} />
                 </TouchableOpacity>
                 <Text style={tw`text-center text-xl py-5`}>
                     Select a Ride — {travelTimeInformation?.distance?.text}
@@ -48,20 +63,20 @@ const RideOptionsCard = () => {
             </View>
             <FlatList
                 data={data}
-                keyExtractor={(item) => item.id}    
+                keyExtractor={(item) => item.id}
                 renderItem={({ item: { id, title, multiplier, image }, item }) => (
                     <TouchableOpacity
-                        onPress={() =>  setSelected(item)}
-                        style={tw`flex-row justify-between items-center px-10 ${
-                            id === selected?.id && "bg-gray-200"
-                        }`}
+
+                        onPress={() => setSelected(item)}
+                        style={tw`flex-row justify-between items-center px-10 ${id === selected?.id && "bg-gray-200"
+                            }`}
                     >
                         <Image
                             style={{
                                 width: 100,
                                 height: 100,
-                                right:20,
-                                bottom:18,
+                                right: 20,
+                                bottom: 18,
                                 resizeMode: 'contain',
                             }}
                             source={{ uri: image }}
@@ -71,9 +86,9 @@ const RideOptionsCard = () => {
                             <Text>{travelTimeInformation?.duration?.text}  Travel Time</Text>
                         </View>
                         <Text style={tw`text-xl right-6 bottom-3`}>
-                            {new Intl.NumberFormat('en-gb', {
+                            {new Intl.NumberFormat('de-DE', {
                                 style: 'currency',
-                                currency: 'GBP'
+                                currency: 'EUR'
                             }).format(
                                 (travelTimeInformation?.duration?.value * SURGE_CHARGE_PRICE * multiplier) / 100,
                             )}
@@ -83,17 +98,27 @@ const RideOptionsCard = () => {
             />
 
             <View style={tw`mt-auto border-t border-gray-200`}>
-                <TouchableOpacity disabled={!selected} 
-                style={tw`bg-black py-3 m-3 rounded-full ${!selected && "bg-gray-300"}`}
-                >
-                <Text style={tw`text-center text-white text-xl `}>
-                Choose {selected?.title}
-                </Text>
+                <TouchableOpacity disabled={!selected}
+                    style={tw`bg-black py-3 m-3 rounded-full ${!selected && "bg-gray-300"}`}
+
+                    onPress={()=> {
+
+
+                        }}
+
+                    >
+                    <Text style={tw`text-center text-white text-xl `}>
+                        Choose {selected?.title}
+                    </Text>
+
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
 };
 
-export default RideOptionsCard
+export default RideOptionsCard;
+
+
+
 

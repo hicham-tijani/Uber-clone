@@ -17,7 +17,6 @@ const NavigateCard = () => {
 
     return (
         <SafeAreaView style={tw`bg-white flex-1`}>
-            <Text style={tw`text-center py-5 text-xl`}>Destination?</Text>
             <View style={tw`border-t border-gray-200 flex-shrink`}>
                 <View>
                     <GooglePlacesAutocomplete
@@ -76,8 +75,10 @@ const toInputBoxStyles = StyleSheet.create({
         borderTopLeftRadius:25,
         borderTopRightRadius:25,
         borderWidth:1.4,
-        borderBlockStartColor:"black",
-        borderBlockEndColor:"white",
+        borderBlockStartColor:"DDDDDF",
+        borderRightColor:"DDDDDF",
+        borderLeftColor:"DDDDDF",
+        borderBlockEndColor:"transparent",
 
     },
     textInput: {

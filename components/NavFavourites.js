@@ -11,19 +11,19 @@ const data = [
         id: '123',
         icon: 'home',
         description: 'Home',
-        location: 'Code Street, London, UK',
+        location: 'San Donato Milanese, Metropolitan City of Milan, Italy',
     },
     {
         id: '456',
         icon: 'briefcase',
         description: 'Work',
-        location: 'The Shard, London Bridge Street, London, UK',
+        location: 'Via Melchiorre Gioia, Milan, Metropolitan',
     },
     {
         id: '789',
         icon: 'heart',
         description: 'Gym',
-        location: '15 Sakuru Road, Sagamu, Nigeria',
+        location: 'Porta Venezia Fitness Club, Via Gustavo Modena, Milan, Metrop',
     },
 ];
 
@@ -40,7 +40,7 @@ const NavFavourites = () => {
             keyExtractor={(item) => item.id}
             ItemSeparatorComponent={() => (
                 <View
-                    style={tw`bg-gray-200 h-[0.5px]`}
+                    style={tw`bg-gray-200 `}
                 />
             )}
             renderItem={({item: { location, description, icon } }) => (
