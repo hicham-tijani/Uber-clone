@@ -1,24 +1,12 @@
-import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image, StatusBar } from 'react-native';
-import React, { useState, useEffect} from 'react';
+import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image, StatusBar, Modal} from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
 import tw from 'tailwind-react-native-classnames';
 import HomeScreen from '../screens/HomeScreen';
-
-
-const sendData = () => {
-    fetch({
-        // ...
-    })
-        .then(() => {
-            showMessage("Success!", "success");
-        })
-        .catch((err) => {
-            setMessage("Failed to send request.", "error");
-        });
-}
+import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 
 const data = [
@@ -42,12 +30,19 @@ const data = [
     },
 ];
 
+
+
 const SURGE_CHARGE_PRICE = 1.5;
 
 const RideOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
+    setTimeout(() => {setVisible(false);}, 4000);
+    const [visible, setVisible] = React.useState(false);
+    const toggleAlert = React.useCallback(() => {
+        setVisible(!visible);
+    }, [visible]);
 
     return (
         <SafeAreaView style={tw`bg-white rounded-tl-3xl rounded-tr-3xl border border-black flex-grow`}>
@@ -96,29 +91,49 @@ const RideOptionsCard = () => {
                     </TouchableOpacity>
                 )}
             />
-
             <View style={tw`mt-auto border-t border-gray-200`}>
                 <TouchableOpacity disabled={!selected}
                     style={tw`bg-black py-3 m-3 rounded-full ${!selected && "bg-gray-300"}`}
 
-                    onPress={()=> {
-
-
-                        }}
-
-                    >
+                    onPress={toggleAlert}
+                    
+                >
                     <Text style={tw`text-center text-white text-xl `}>
                         Choose {selected?.title}
                     </Text>
 
                 </TouchableOpacity>
+
+                <FancyAlert
+                    visible={visible}
+                    icon={<View style={{
+                        flex: 1,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'green',
+                        borderRadius: 50,
+                        width: '100%',
+                    }}><Text>🤓</Text></View>}
+                    style={{ backgroundColor: 'white' }}
+                >
+                    <Text style={{ marginTop: -16, marginBottom: 32 }}>Hello there</Text>
+                </FancyAlert>
+
             </View>
         </SafeAreaView>
+
     );
 };
 
 export default RideOptionsCard;
 
 
-
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+});
 
