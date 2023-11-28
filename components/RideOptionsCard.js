@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image, StatusBar, Modal} from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image, StatusBar } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -6,7 +6,8 @@ import { useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
 import tw from 'tailwind-react-native-classnames';
 import HomeScreen from '../screens/HomeScreen';
-import { FancyAlert } from 'react-native-expo-fancy-alerts';
+import Modal from "react-native-modal";
+
 
 
 const data = [
@@ -38,11 +39,11 @@ const RideOptionsCard = () => {
     const navigation = useNavigation();
     const [selected, setSelected] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
-    setTimeout(() => {setVisible(false);}, 4000);
-    const [visible, setVisible] = React.useState(false);
-    const toggleAlert = React.useCallback(() => {
-        setVisible(!visible);
-    }, [visible]);
+    /*setTimeout(() => {setVisible(false);}, 4000);*/
+    const [isVisible,setVisible] = useState(false);
+    const toggleVisibility = () => setVisible(!isVisible);
+
+
 
     return (
         <SafeAreaView style={tw`bg-white rounded-tl-3xl rounded-tr-3xl border border-black flex-grow`}>
@@ -95,8 +96,8 @@ const RideOptionsCard = () => {
                 <TouchableOpacity disabled={!selected}
                     style={tw`bg-black py-3 m-3 rounded-full ${!selected && "bg-gray-300"}`}
 
-                    onPress={toggleAlert}
-                    
+                    onPress={toggleVisibility}
+
                 >
                     <Text style={tw`text-center text-white text-xl `}>
                         Choose {selected?.title}
@@ -104,21 +105,31 @@ const RideOptionsCard = () => {
 
                 </TouchableOpacity>
 
-                <FancyAlert
-                    visible={visible}
-                    icon={<View style={{
-                        flex: 1,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'green',
-                        borderRadius: 50,
-                        width: '100%',
-                    }}><Text>🤓</Text></View>}
-                    style={{ backgroundColor: 'white' }}
-                >
-                    <Text style={{ marginTop: -16, marginBottom: 32 }}>Hello there</Text>
-                </FancyAlert>
+                <Modal visible={isVisible} animationType="fade" transparent={true} onRequestClose={() => toggleVisibility()}>
+                    <TouchableOpacity style={styles.modalContainer} onPressOut={() => toggleVisibility()}>
+                        <View style={styles.modalView}>
+                            <View style={styles.alert}>
+                                <Text style={styles.alertTitle}>Uber notification</Text>
+                                <Text style={styles.alertMessage}>Your account has been activated.</Text>
+                                <View style={styles.alertButtonGroup}>
+                                    <View style={styles.alertButton}>
+                                        <View >
+                                        <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+                                            <Text style={styles.text2}>Details</Text>
+                                            </TouchableOpacity>
+                                            </View>
+
+                                            <View>
+                                            <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+                                            <Text style={styles.text1}>Ok</Text>
+                                            </TouchableOpacity>
+                                            </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                </Modal>
 
             </View>
         </SafeAreaView>
@@ -130,10 +141,73 @@ export default RideOptionsCard;
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'space-around',
-        alignItems: 'center',
+
+    text1:{
+        bottom:27,
+        right:26,
+        fontSize:15
+
+    },
+    text2:{
+        top:-10,
+        left:69,
+        fontSize:15
+    },
+    container:{
+        display:'flex',
+        flex:1,
+        justifyContent:'center',
+        alignContent:'center',
+        backgroundColor:'transparent'
+    },
+    modalContainer:{
+        backgroundColor:"transparent",
+        top:0,
+        left:-15,
+        right:0,
+        bottom:0,
+        position:'absolute',
+    },
+    modalView:{
+        flex:1,
+        alignContent:'center',
+        justifyContent:'center'
+    },
+    alert:{
+        height:165,
+        width:'100%',
+        maxWidth:300,
+        margin:48,
+        elevation:24,
+        borderRadius:25,
+        backgroundColor:'#dddf'
+    },
+    alertTitle:{
+        margin:24,
+        fontWeight:"500",
+        fontSize:24,
+        color:"#000"
+    },
+    alertMessage:{
+        marginLeft:24,
+        marginRight:24,
+        marginBottom:24,
+        fontSize:16,
+        color:"#000"
+    },
+    alertButtonGroup:{
+        marginTop:0,
+        marginRight:0,
+        marginBottom:8,
+        marginLeft:24,
+        padding:10,
+        display:"flex",
+        flexDirection:'row',
+        justifyContent:"center"
+    },
+    alertButton:{
+        marginTop:12,
+        marginRight:8,
+        width:100
     },
 });
-
