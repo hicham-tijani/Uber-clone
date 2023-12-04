@@ -8,6 +8,7 @@ import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {createStackNavigator} from '@react-navigation/stack';
+import RideDetailsScreen from './screens/RideDetailsScreen';
 
 
 export default function App() {
@@ -37,6 +38,15 @@ const Stack = createStackNavigator();
                     headerShown: false,
                   }}
                 />
+                <Stack.Screen
+                  name="RideDetailsScreen"
+                  component={RideDetailsScreen}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                
+              
               </Stack.Navigator>
             </KeyboardAvoidingView>
         </SafeAreaProvider>

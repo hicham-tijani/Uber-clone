@@ -72,7 +72,7 @@ const Map = () => {
                     description={origin.description}
                     identifier="origin"
                 >
-                    <Image source={require('../assets/marker.png')} style={{ height: 35, width: 35 }} />
+                    <Image source={require('../assets/marker2.png')} style={{ height: 35, width: 35 }} />
                 </Marker>
             )}
             {destination?.location && (
@@ -85,7 +85,7 @@ const Map = () => {
                     description={destination.description}
                     identifier="destination"
                 >
-                    <Image source={require('../assets/marker.png')} style={{ height: 35, width: 35 }} />
+                    <Image source={require('../assets/marker2.png')} style={{ height: 35, width: 35 }} />
                 </Marker>
 
 

@@ -5,47 +5,31 @@ import { Icon } from 'react-native-elements';
 import 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native';
 
-const data = [
-  {
-    id: "123",
-    title: "Get a ride",
-    image: "https://links.papareact.com/3pn",
-    screen: "MapScreen",
-  },
-  {
-    id: "456",
-    title: "Order food",
-    image: "https://links.papareact.com/28w",
-    screen: "EatScreen",
-  },
-];
 
 
 const NavOptions = () => {
   const navigation = useNavigation();
 
   return (
-    <FlatList
-      data={data}
-      horizontal
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <TouchableOpacity
-          onPress={() => navigation.navigate(item.screen)}
-          style={tw`p-2 pl-5 pb-5 pt-2 bg-gray-200 m-1 rounded-2xl`}>
+  
           <View>
             <Image
-              style={{ width: 120, height: 105, resizeMode: "contain" }}
-              source={{ uri: item.image }} />
-            <Text style={tw`mt-2 text-lg font-semibold`}>{item.title}</Text>
-
-            <Icon style={tw`p-2 bg-black rounded-full w-10 mt-4`}
+              style={{ width: 260, height: 150, left:110, resizeMode: "contain" }}
+              source={{ uri: "https://i.pinimg.com/474x/33/d2/57/33d2571393537ca4235e98c424c7e029.jpg" }} />
+           
+           <TouchableOpacity
+              onPress={() => { navigation.navigate("MapScreen"); }}
+           >
+             <View style={tw`absolute bottom-7 left-6`}>
+              <Text style={tw`mt-2 text-2xl   font-semibold`}>Get a Ride</Text>
+            <Icon style={tw`p-1 bg-black  rounded-full  w-14 mt-4`}
               name="arrowright" color="white" type='antdesign' />
+            </View>
+           </TouchableOpacity>
+           
+            
 
           </View>
-        </TouchableOpacity>
-      )}
-    />
   );
 };
 

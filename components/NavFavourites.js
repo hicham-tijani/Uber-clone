@@ -11,19 +11,19 @@ const data = [
         id: '123',
         icon: 'home',
         description: 'Home',
-        location: 'San Donato Milanese, Metropolitan City of Milan, Italy',
+        location:'San Donato Milanese, Metropolitan City of Milan, Italy',
     },
     {
         id: '456',
-        icon: 'briefcase',
-        description: 'Work',
-        location: 'Via Melchiorre Gioia, Milan, Metropolitan',
+        icon: 'airplane',
+        description: 'Airport',
+        location:'Linate, Metropolitan City of Milan, Italy',
     },
     {
         id: '789',
         icon: 'heart',
         description: 'Gym',
-        location: 'Porta Venezia Fitness Club, Via Gustavo Modena, Milan, Metrop',
+        location:'Porta Venezia Fitness Club, Via Gustavo Modena, Milan, Italy',
     },
 ];
 
@@ -36,6 +36,7 @@ const NavFavourites = () => {
 
     return (
         <FlatList
+        style={tw`bg-gray-200 rounded-3xl top-12`}
             data={data}
             keyExtractor={(item) => item.id}
             ItemSeparatorComponent={() => (
@@ -45,7 +46,7 @@ const NavFavourites = () => {
             )}
             renderItem={({item: { location, description, icon } }) => (
                 <TouchableOpacity
-                    style={tw`flex-row items-center p-5`}
+                    style={tw`flex-row items-center p-6`}
                     onPress={( item ) => {
                         if (!origin) {
                             dispatch(
@@ -68,16 +69,16 @@ const NavFavourites = () => {
                                 console.log(`Destination: ${location} and ${description}`),
                             );
                             
-                            navigation.navigate("RideOptionsCard");
+                            navigation.navigate("MapScreen");
                         }
                     }}
                 >
                     <Icon
                         style={{
-                            backgroundColor: "#dfdfdf",
-                            padding: 6,
+                            backgroundColor: "black",
+                            padding: 8,
                             borderRadius: 100,
-                            marginRight: 8,
+                            marginRight: 10,
                         }}
                         name={icon}
                         type="ionicon"

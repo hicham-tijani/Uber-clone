@@ -2,10 +2,10 @@ import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, FlatList, Image
 import React, { useState, useEffect } from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
 import tw from 'tailwind-react-native-classnames';
-import HomeScreen from '../screens/HomeScreen';
+import RideDetailsScreen from '../screens/RideDetailsScreen';
 import Modal from "react-native-modal";
 
 
@@ -33,16 +33,17 @@ const data = [
 
 
 
+
 const SURGE_CHARGE_PRICE = 1.5;
 
 const RideOptionsCard = () => {
     const navigation = useNavigation();
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected, setData] = useState(null);
     const travelTimeInformation = useSelector(selectTravelTimeInformation);
     /*setTimeout(() => {setVisible(false);}, 4000);*/
     const [isVisible,setVisible] = useState(false);
     const toggleVisibility = () => setVisible(!isVisible);
-
+    const dispatch = useDispatch();
 
 
     return (
@@ -110,17 +111,18 @@ const RideOptionsCard = () => {
                         <View style={styles.modalView}>
                             <View style={styles.alert}>
                                 <Text style={styles.alertTitle}>Uber notification</Text>
-                                <Text style={styles.alertMessage}>Your account has been activated.</Text>
+                                <Text style={styles.alertMessage}>Ride booked successfully  <Icon style={tw`top-0`}name="check" type="font-awesome" color="black" size={16}/> </Text>
                                 <View style={styles.alertButtonGroup}>
                                     <View style={styles.alertButton}>
-                                        <View >
-                                        <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
-                                            <Text style={styles.text2}>Details</Text>
-                                            </TouchableOpacity>
+                                        <View>
+                                        <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate("RideDetailsScreen")}>
+                                           <Text style={styles.text2}>Details </Text>
+                                            </TouchableOpacity>  
+                                          
                                             </View>
 
                                             <View>
-                                            <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+                                            <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate("HomeScreen")}>
                                             <Text style={styles.text1}>Ok</Text>
                                             </TouchableOpacity>
                                             </View>
@@ -143,16 +145,40 @@ export default RideOptionsCard;
 const styles = StyleSheet.create({
 
     text1:{
-        bottom:27,
-        right:26,
-        fontSize:15
+        bottom:-4,
+        left:36,
+        fontSize:15,
+        color:"black",
 
     },
     text2:{
-        top:-10,
-        left:69,
-        fontSize:15
+        top:3,
+        left:29,
+        fontSize:15,
+        color:"white",
     },
+
+    button1:{
+        width:100,
+        height:28,
+        borderRadius:10,
+        left:59,
+        top:-15,
+        backgroundColor:"black",
+        borderWidth:1,
+    },
+
+    button2:{
+        width:100,
+        height:27,
+        borderRadius:10,
+        right:69,
+        top:-42,
+        backgroundColor:"#e9ecef",
+        borderWidth:1,
+        borderBlockColor:"black"
+    },
+
     container:{
         display:'flex',
         flex:1,
@@ -180,20 +206,21 @@ const styles = StyleSheet.create({
         margin:48,
         elevation:24,
         borderRadius:25,
-        backgroundColor:'#dddf'
+        backgroundColor:'#e9ecef'
     },
     alertTitle:{
+        top:-13,
         margin:24,
         fontWeight:"500",
         fontSize:24,
         color:"#000"
     },
     alertMessage:{
-        marginLeft:24,
+        marginLeft:44,
         marginRight:24,
         marginBottom:24,
         fontSize:16,
-        color:"#000"
+        color:"#000",
     },
     alertButtonGroup:{
         marginTop:0,
@@ -208,6 +235,6 @@ const styles = StyleSheet.create({
     alertButton:{
         marginTop:12,
         marginRight:8,
-        width:100
+        width:100,
     },
 });
