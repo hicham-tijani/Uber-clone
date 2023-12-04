@@ -55,7 +55,20 @@ Press s │ switch to development build
 ```
 
 ## Screenshot
-![scrennshot](https://github.com/hicham-tijani/Uber-clone/assets/99076537/cb4d5041-ebbc-47e0-8477-a0f773c861f7)
 
-Thanks for watching! 
+<div>
+<img src="https://github.com/hicham-tijani/Uber-clone/assets/99076537/cb4d5041-ebbc-47e0-8477-a0f773c861f7" width="300">
+
+<img src="https://github.com/hicham-tijani/Uber-clone/assets/99076537/2cf9c388-be2b-4073-b8e7-13a36572d78e" width="300">
+
+<img src="https://github.com/hicham-tijani/Uber-clone/assets/99076537/3464d05c-f70d-4e47-95ca-d0a5a9530d0c)" width="300">
+
+<img src="https://github.com/hicham-tijani/Uber-clone/assets/99076537/0692c701-30d2-4e1e-98f1-494eba40a675)" width="300">
+
+</div>
+
+
+##
+
+Thanks for watching! 🤟🏽💻
   
